@@ -1,13 +1,37 @@
-const { Client } = require('discord.js');
-const config = require('dotenv').config();
-const client = new Client();
+import Discord from 'discord.js';
+import { prefix } from './config.json';
+import 'dotenv/config';
 
-client.login(process.env.BOT_TOKEN);
+import * as CommandCoinFlip from './commands/coin-flip';
+
+const client = new Discord.Client();
+client.commands = new Discord.Collection();
+client.commands.set(CommandCoinFlip.name, CommandCoinFlip);
+
+(async () => {
+  try {
+    await client.login(process.env.BOT_TOKEN);
+  } catch (error) {
+    console.error(error.message);
+  }
+})();
 
 client.on('ready', () => {
   console.log(`Logged in as ${client.user.tag}!`);
 });
 
 client.on('message', message => {
+  if (!message.content.startsWith(prefix) || message.author.bot) return;
+
+  const args = message.content.slice(prefix.length).split(/ +/);
+  const command = args.shift().toLowerCase();
+
+  if (!client.commands.has(command)) return;
+
+  try {
+    client.commands.get(command).execute(message, args);
+  } catch (error) {
+    console.error(error);
+  }
 });
 
