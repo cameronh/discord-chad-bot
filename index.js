@@ -1,4 +1,4 @@
-import fs, { readdir } from 'fs';
+import fs from 'fs';
 import Discord from 'discord.js';
 import { prefix } from './config.json';
 import 'dotenv/config';
