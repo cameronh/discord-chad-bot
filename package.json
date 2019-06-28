@@ -1,0 +1,13 @@
+{
+  "name": "chad_bot",
+  "version": "1.0.0",
+  "description": "A bot to service the Chad Nerds discord server.",
+  "main": "index.js",
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "discord.js": "^11.5.1",
+    "dotenv": "^8.0.0"
+  },
+  "devDependencies": {}
+}
