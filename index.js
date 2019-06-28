@@ -1,15 +1,27 @@
+import fs, { readdir } from 'fs';
 import Discord from 'discord.js';
 import { prefix } from './config.json';
 import 'dotenv/config';
 
-import * as CommandCoinFlip from './commands/coin-flip';
-
 const client = new Discord.Client();
 client.commands = new Discord.Collection();
-client.commands.set(CommandCoinFlip.name, CommandCoinFlip);
+
+async function loadCommands() {
+  fs.readdir('./commands', (err, files) => {
+    if (err) console.error(err);
+    files.filter(file => file.endsWith('.js')).forEach(async file => {
+      const command = await import(`./commands/${file}`);
+      if (command.name) {
+        client.commands.set(command.name, command);
+        console.info(`[Command] Loaded: ${command.name}`);
+      }
+    });
+  });
+}
 
 (async () => {
   try {
+    await loadCommands();
     await client.login(process.env.BOT_TOKEN);
   } catch (error) {
     console.error(error.message);
