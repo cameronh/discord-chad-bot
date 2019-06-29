@@ -1,6 +1,6 @@
 import fs from 'fs';
 import Discord from 'discord.js';
-import { prefix } from './config.json';
+import { prefix, info_channel } from './config.json';
 import 'dotenv/config';
 
 const client = new Discord.Client();
@@ -30,6 +30,13 @@ async function loadCommands() {
 
 client.on('ready', () => {
   console.log(`Logged in as ${client.user.tag}!`);
+});
+
+client.on('guildMemberAdd', member => {
+  const channel = member.guild.channels.find(ch => ch.name === info_channel);
+  if (!channel) return;
+
+  channel.send(`Welcome to the server, ${member}!`);
 });
 
 client.on('message', async message => {

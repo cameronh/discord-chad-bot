@@ -6,12 +6,14 @@ export async function execute(message, args) {
   if (args[0]) {
     if (message.member.voiceChannel) {
       try {
-        const voiceConnection = await message.member.voiceChannel.join();
         const stream = ytdl(args[0], { filter: 'audioonly' });
-        const dispatcher = voiceConnection.playStream(stream);
-        dispatcher.on('end', () => {
-          message.member.voiceChannel.leave();
-        });
+        if (stream) {
+          const voiceConnection = await message.member.voiceChannel.join();
+          const dispatcher = voiceConnection.playStream(stream);
+          dispatcher.on('end', () => {
+            message.member.voiceChannel.leave();
+          });
+        }
       } catch (error) {
         console.error(error);
       }
