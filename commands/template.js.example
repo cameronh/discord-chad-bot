@@ -1,4 +1,0 @@
-export const name = 'foobar'; // this will be the name of the command sans prefix
-export const description = 'A description of your command';
-export function execute(message, args) {
-}
