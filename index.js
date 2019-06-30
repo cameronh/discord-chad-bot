@@ -6,7 +6,7 @@ import 'dotenv/config';
 const client = new Discord.Client();
 client.commands = new Discord.Collection();
 
-const musicQueue = new Discord.Collection();
+const musicQueue = new Array();
 client.musicQueue = musicQueue;
 
 async function loadCommands() {
