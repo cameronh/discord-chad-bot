@@ -10,9 +10,9 @@ export function execute(message) {
   queueEmbed.setColor('#0099ff');
   queueEmbed.setAuthor('Song Queue');
   musicQueue.songs.map((song, id) => {
-    if (id !== 0) queueEmbed.addField(`**(${id}):** ${song.title}`, 'YouTube');
+    if (id !== 0) queueEmbed.addField(`**(${id}):** ${song.title}`, `Added by ${song.added_by}`);
   });
   queueEmbed.addBlankField();
-  queueEmbed.addField(`**🎶 Now playing:** ${musicQueue.songs[0].title}`, 'YouTube');
+  queueEmbed.addField(`**🎶 Now playing:** ${musicQueue.songs[0].title}`, `Added by ${musicQueue.songs[0].added_by}`);
   return message.channel.send(queueEmbed);
 }

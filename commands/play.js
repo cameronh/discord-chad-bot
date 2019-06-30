@@ -25,6 +25,7 @@ async function handleVideo(video, msg) {
     id: video.id,
     title: Util.escapeMarkdown(video.title),
     url: `https://www.youtube.com/watch?v=${video.id}`,
+    added_by: msg.author,
   };
   if (!musicQueue.songs || musicQueue.songs.length === 0) {
     const queue = {
@@ -50,7 +51,8 @@ async function handleVideo(video, msg) {
     }
   } else {
     musicQueue.songs.push(song);
-    return msg.channel.send(`✅ **${song.title}** has been added to the queue!`);
+    msg.channel.send(`✅ **${song.title}** has been added to the queue!`);
+    return await msg.delete();
   }
 }
 
@@ -69,6 +71,7 @@ async function play(msg, song) {
       play(msg, musicQueue.songs[0]);
     });
 
+    await msg.delete();
     musicQueue.textChannel.send(`🎶 Started playing: **${song.title}**`);
   } catch (error) {
     console.error(error.message);
