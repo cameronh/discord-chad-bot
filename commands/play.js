@@ -71,8 +71,8 @@ async function play(msg, song) {
       play(msg, musicQueue.songs[0]);
     });
 
-    await msg.delete();
     musicQueue.textChannel.send(`🎶 Started playing: **${song.title}**`);
+    await msg.delete();
   } catch (error) {
     console.error(error.message);
   }
