@@ -21,7 +21,6 @@ export async function execute(message, args) {
 
 async function handleVideo(video, msg) {
   const musicQueue = msg.client.musicQueue;
-  // console.log(video);
   const song = {
     id: video.id,
     title: Util.escapeMarkdown(video.title),
@@ -51,7 +50,6 @@ async function handleVideo(video, msg) {
     }
   } else {
     musicQueue.songs.push(song);
-    console.log(musicQueue.songs);
     return msg.channel.send(`✅ **${song.title}** has been added to the queue!`);
   }
 }
@@ -64,7 +62,6 @@ async function play(msg, song) {
   }
 
   try {
-    // console.log(musicQueue);
     const dispatcher = await musicQueue.connection.playStream(ytdl(song.url, { filter: 'audioonly' }));
     dispatcher.on('end', () => {
       musicQueue.songs.shift();
