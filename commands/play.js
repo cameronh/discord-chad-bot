@@ -26,13 +26,13 @@ async function handleVideo(video, msg) {
     title: Util.escapeMarkdown(video.title),
     url: `https://www.youtube.com/watch?v=${video.id}`,
   };
-  if (!musicQueue.songs) {
+  if (!musicQueue.songs || musicQueue.songs.length === 0) {
     const queue = {
       textChannel: msg.channel,
       voiceChannel: msg.member.voiceChannel,
       connection: null,
       songs: [],
-      volume: 1,
+      volume: 0.5,
       playing: true,
     };
 
@@ -63,6 +63,7 @@ async function play(msg, song) {
 
   try {
     const dispatcher = await musicQueue.connection.playStream(ytdl(song.url, { filter: 'audioonly' }));
+    dispatcher.setVolume(musicQueue.volume);
     dispatcher.on('end', () => {
       musicQueue.songs.shift();
       play(msg, musicQueue.songs[0]);
