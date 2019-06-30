@@ -6,6 +6,9 @@ import 'dotenv/config';
 const client = new Discord.Client();
 client.commands = new Discord.Collection();
 
+const musicQueue = new Discord.Collection();
+client.musicQueue = musicQueue;
+
 async function loadCommands() {
   fs.readdir('./commands', (err, files) => {
     if (err) console.error(err);
