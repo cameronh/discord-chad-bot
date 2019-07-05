@@ -33,7 +33,7 @@ async function handleVideo(video, msg) {
       voiceChannel: msg.member.voiceChannel,
       connection: null,
       songs: [],
-      volume: 0.5,
+      volume: 0.05,
       playing: true,
     };
 
