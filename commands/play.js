@@ -78,7 +78,7 @@ async function play(msg, song) {
 
   try {
     const dispatcher = await musicQueue.connection.playStream(ytdl(song.url, { filter: 'audioonly' }));
-    dispatcher.setVolumeLogarithmic(musicQueue.volume / 100);
+    dispatcher.setVolumeLogarithmic(musicQueue.volume / 25);
     dispatcher.on('end', () => {
       musicQueue.songs.shift();
       play(msg, musicQueue.songs[0]);

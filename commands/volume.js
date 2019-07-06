@@ -8,7 +8,7 @@ export function execute(message, args) {
   const volume = parseFloat(args[0]);
   if (volume >= 0 && volume <= 10) {
     musicQueue.volume = volume;
-    musicQueue.connection.dispatcher.setVolumeLogarithmic(volume / 100);
+    musicQueue.connection.dispatcher.setVolumeLogarithmic(volume / 25);
     return message.channel.send(`Volume has been set to: **${volume}**`);
   }
 }
