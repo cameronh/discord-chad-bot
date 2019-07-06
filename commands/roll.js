@@ -1,5 +1,6 @@
 export const name = 'roll';
 export const description = 'Returns a random number between A and B. Defaults to 1-100 if no arguments provided';
+export const usage = '<max> | <min> <max>';
 export function execute(message, args) {
   let min = 1;
   let max = 100;

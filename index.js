@@ -1,6 +1,6 @@
 import fs from 'fs';
 import Discord from 'discord.js';
-import { prefix, info_channel } from './config.json';
+import { prefix, info_channel } from './config';
 import 'dotenv/config';
 
 const client = new Discord.Client();
@@ -43,12 +43,13 @@ client.on('guildMemberAdd', member => {
 });
 
 client.on('message', async message => {
-  if (!message.content.startsWith(prefix) || message.author.bot) return;
+  if (!message.content.startsWith(prefix) ||
+  message.content.length <= 1 || message.content.endsWith(prefix) || message.author.bot) return;
 
   const args = message.content.slice(prefix.length).split(/ +/);
   const commandName = args.shift().toLowerCase();
 
-  if (!client.commands.has(commandName)) return;
+  if (!client.commands.has(commandName)) return message.channel.send(`Unknown command. Type **${prefix}help** for a list of commands.`);
   const command = client.commands.get(commandName);
 
   try {

@@ -6,6 +6,7 @@ const youtube = new Youtube(process.env.GOOGLE_API_KEY);
 
 export const name = 'play';
 export const description = 'Adds a YouTube URL to the Music Queue.';
+export const usage = '<youtube url>';
 export async function execute(message, args) {
   if (args[0]) {
     if (message.member.voiceChannel) {

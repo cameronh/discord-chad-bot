@@ -1,5 +1,6 @@
 export const name = 'volume';
 export const description = 'Adjusts the volume of the music being played.';
+export const usage = '<amount> (0-1)';
 export function execute(message, args) {
   const musicQueue = message.client.musicQueue;
   if (!musicQueue.songs || musicQueue.songs.length === 0) return message.channel.send('There is nothing playing.');
