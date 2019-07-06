@@ -34,7 +34,7 @@ async function handleVideo(video, msg) {
       voiceChannel: msg.member.voiceChannel,
       connection: null,
       songs: [],
-      volume: 0.05,
+      volume: 5,
       playing: true,
     };
 
@@ -66,7 +66,7 @@ async function play(msg, song) {
 
   try {
     const dispatcher = await musicQueue.connection.playStream(ytdl(song.url, { filter: 'audioonly' }));
-    dispatcher.setVolume(musicQueue.volume);
+    dispatcher.setVolumeLogarithmic(musicQueue.volume / 100);
     dispatcher.on('end', () => {
       musicQueue.songs.shift();
       play(msg, musicQueue.songs[0]);
