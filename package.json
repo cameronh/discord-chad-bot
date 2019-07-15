@@ -10,9 +10,11 @@
     "start:dev": "nodemon --exec babel-node index.js"
   },
   "dependencies": {
+    "countdown": "^2.6.0",
     "discord.js": "^11.5.1",
     "dotenv": "^8.0.0",
     "ffmpeg-static": "^2.5.0",
+    "moment": "^2.24.0",
     "node-opus": "^0.3.2",
     "simple-youtube-api": "^5.2.1",
     "ytdl-core": "^0.29.3"
