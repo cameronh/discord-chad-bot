@@ -16,6 +16,8 @@
     "ffmpeg-static": "^2.5.0",
     "moment": "^2.24.0",
     "node-opus": "^0.3.2",
+    "pouchdb": "^7.1.1",
+    "pouchdb-upsert": "^2.2.0",
     "simple-youtube-api": "^5.2.1",
     "ytdl-core": "^0.29.3"
   },

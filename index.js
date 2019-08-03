@@ -1,10 +1,15 @@
 import fs from 'fs';
 import Discord from 'discord.js';
+import PouchDB from 'pouchdb';
 import { prefix, info_channel } from './config';
 import 'dotenv/config';
+PouchDB.plugin(require('pouchdb-upsert'));
+
+const db = new PouchDB('db');
 
 const client = new Discord.Client();
 client.commands = new Discord.Collection();
+client.db = db;
 
 const musicQueue = new Array();
 client.musicQueue = musicQueue;
@@ -44,7 +49,7 @@ client.on('guildMemberAdd', member => {
 
 client.on('message', async message => {
   if (!message.content.startsWith(prefix) ||
-  message.content.length <= 1 || message.content.endsWith(prefix) || message.author.bot) return;
+    message.content.length <= 1 || message.content.endsWith(prefix) || message.author.bot) return;
 
   const args = message.content.slice(prefix.length).split(/ +/);
   const commandName = args.shift().toLowerCase();
