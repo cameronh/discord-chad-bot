@@ -12,7 +12,7 @@ export async function execute(message, args) {
   if (url) {
     if (message.member.voiceChannel) {
       try {
-        if (url.match(/^https?:\/\/(www.youtube.com|youtube.com)\/playlist(.*)$/)) {
+        if (url.match(/^https?:\/\/(www.youtube.com|youtube.com)\/list(.*)$/)) {
           const playlist = await youtube.getPlaylist(url);
           const videos = await playlist.getVideos();
           for (const video of Object.values(videos)) {
