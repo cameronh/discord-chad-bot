@@ -77,7 +77,10 @@ async function play(msg, song) {
   }
 
   try {
-    const dispatcher = await musicQueue.connection.playStream(ytdl(song.url, { filter: 'audioonly' }));
+    const dispatcher = await musicQueue.connection.playStream(ytdl(song.url, {
+      filter: 'audioonly',
+      quality: 'highestaudio',
+      highWaterMark: 1 << 25 }), { highWaterMark: 1 });
     dispatcher.setVolumeLogarithmic(musicQueue.volume / 25);
     dispatcher.on('end', () => {
       musicQueue.songs.shift();
@@ -87,6 +90,6 @@ async function play(msg, song) {
     musicQueue.textChannel.send(`🎶 Started playing: **${song.title}**`);
     await msg.delete();
   } catch (error) {
-    console.error(error.message);
+    console.error(error);
   }
 }
