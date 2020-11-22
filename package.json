@@ -19,6 +19,7 @@
     "pouchdb": "^7.1.1",
     "pouchdb-upsert": "^2.2.0",
     "simple-youtube-api": "^5.2.1",
+    "soundcloud-downloader": "^0.2.0",
     "ytdl-core": "^4.0.0"
   },
   "devDependencies": {
